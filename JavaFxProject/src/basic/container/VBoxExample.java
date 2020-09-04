@@ -1,6 +1,9 @@
 package basic.container;
 
 import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -24,7 +27,7 @@ public class VBoxExample extends Application{
 		ImageView iv = new ImageView();
 		iv.setFitWidth(200);
 		iv.setPreserveRatio(true);
-		iv.setImage(new Image("/basic/sample.jpg"));
+		iv.setImage(new Image("/basic/images/fruit1.jpg"));
 		
 		HBox hbox = new HBox();
 		hbox.setAlignment(Pos.CENTER); //컨트롤 중앙정렬
@@ -37,7 +40,19 @@ public class VBoxExample extends Application{
 		hbox.setHgrow(bt1, Priority.ALWAYS);
 		bt1.setMaxWidth(Double.MAX_VALUE);
 		
-		
+		//이벤트 핸들러를 해당 컨트롤에 등록.
+//		bt1.setOnAction(event->Platform.exit());
+		bt1.setOnAction(new EventHandler<ActionEvent>() {
+			int loc = 1;
+			@Override
+			public void handle(ActionEvent ae) {
+				if(loc==9) {
+					loc = 1;
+				}
+				iv.setImage(new Image("/basic/images/fruit"+ loc++ +".jpg"));
+			}	
+		});
+			
 		root.getChildren().add(iv);
 		root.getChildren().add(hbox);
 		hbox.getChildren().add(bt);//컨테이너에 컨트롤 추가
