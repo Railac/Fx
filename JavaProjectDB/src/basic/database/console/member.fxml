@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="217.0" prefWidth="211.0">
+	<!-- 회원등록창 -->
+	<padding>
+		<Insets topRightBottomLeft="10" />
+	</padding>
+	<center>
+		<GridPane hgap="10" vgap="10" alignment="CENTER">
+			<children>
+				<Label prefWidth="50" text="이름" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+   				<Label prefWidth="50" text="나이" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+   				<Label prefWidth="50" text="연락처" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+   				<Label prefWidth="50" text="이메일" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+   				<TextField id="txtName" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+   				<TextField id="txtAge" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+   				<TextField id="txtPhone" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+   				<TextField id="txtEmail" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+			</children>
+		
+		</GridPane>
+	
+	</center>
+	
+	<bottom>
+		<HBox prefHeight="24.0" prefWidth="123.0" spacing="20" alignment="CENTER">
+			<children>
+				<Button id="btnMemberAdd" text="등록" />
+				<Button id="btnMemberInit" text="취소" />
+			</children>
+		
+		</HBox>
+	</bottom>
+</BorderPane>
+

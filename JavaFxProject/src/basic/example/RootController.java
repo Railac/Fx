@@ -122,7 +122,7 @@ public void setPrimaryStage(Stage primaryStage) {
 		btnUpdate.setLayoutX(85);
 		btnUpdate.setLayoutY(184);
 		
-		btnUpdate.setOnAction(event->{
+		btnUpdate.setOnAction(event->{ //더블클릭해서 들어온창에서 수정버튼을 눌렀을때 이벤트
 			for(int i=0; i<list.size(); i++) {
 				if(list.get(i).getName().equals(name)) {
 //					Student student = new Student(name, Integer.parseInt(tKorean.getText()),
