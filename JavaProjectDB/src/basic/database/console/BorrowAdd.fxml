@@ -5,11 +5,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
 
 <BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="217.0" prefWidth="211.0">
-	<!-- 도서등록창 -->
+	<!-- 대출 버튼 클릭했을떄 대출 창-->
 	<padding>
 		<Insets topRightBottomLeft="10" />
 	</padding>
@@ -17,27 +15,16 @@
 		<GridPane hgap="10" vgap="10" alignment="CENTER">
 			<children>
 				<Label prefWidth="50" text="도서명" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-   				<Label prefWidth="50" text="저자" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-   				<Label prefWidth="50" text="출판사" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-   				<Label prefWidth="50" text="가격" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+   				<Label prefWidth="50" text="대출여부" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+   				<Label prefWidth="50" text="반납일" GridPane.columnIndex="0" GridPane.rowIndex="2" />
    				<TextField id="txtTitle" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="0" />
    				<TextField id="txtAuthor" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="1" />
    				<TextField id="txtPublisher" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-   				<TextField id="txtPrice" prefWidth="100" GridPane.columnIndex="1" GridPane.rowIndex="3" />
 			</children>
 		
 		</GridPane>
 	
 	</center>
-	<bottom>
-		<HBox prefHeight="24.0" prefWidth="123.0" spacing="20" alignment="CENTER">
-			<children>
-				<Button id="btnBookAdd1" text="등록" />
-				<Button id="btnBookInit" text="취소" />
-				<Button id="btnBookCancel" text="종료" />
-			</children>
-		
-		</HBox>
-	</bottom>
+	
 </BorderPane>
 

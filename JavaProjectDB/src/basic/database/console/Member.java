@@ -38,7 +38,7 @@ public class Member {
 		this.phone.set(phone);
 	}
 	
-	public String getEamil() {
+	public String getEmail() {
 		return this.email.get();
 	}
 	public void setEmail(String email) {

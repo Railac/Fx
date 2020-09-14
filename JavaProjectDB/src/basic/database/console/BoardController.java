@@ -27,12 +27,13 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class BoardController implements Initializable{
-	
-@FXML Button btnAdd, btnDelete, btnRegister;//btnAdd=도서등록 , btnDelete=도서삭제
+	//btnAdd=도서등록 , btnDelete=도서삭제, btnMember=회원정보, btnBookborrow=도서대출
+@FXML Button btnAdd, btnDelete, btnMember, btnBookborrow;
 @FXML TableView<Book> tableView;
 
 ObservableList<Book> list;
-ObservableList<Member> mlist;
+ObservableList<Book> list2;
+
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		TableColumn<Book, ?> tc = tableView.getColumns().get(0); //첫번째칼럼
@@ -47,8 +48,9 @@ ObservableList<Member> mlist;
 		tc = tableView.getColumns().get(3);
 		tc.setCellValueFactory(new PropertyValueFactory<>("price"));
 		
-		list= FXCollections.observableArrayList();
-		mlist = FXCollections.observableArrayList();
+		//도서정보 등록하는 리스트
+		list= FXCollections.observableArrayList(); 
+		
 		//첫화면 리스트 초기화
 		tableView.setItems(list);
 		
@@ -66,65 +68,108 @@ ObservableList<Member> mlist;
 		
 		//도서등록 눌렀을때
 		btnAdd.setOnAction(event->handlebtnAdd());
-		//회원등록 눌렀을때
-		btnRegister.setOnAction(event->handleBtnRegister());
+		
+		//회원정보 보기
+		btnMember.setOnAction(event->handleBtnMember());
+		
+		//도서대출
+		btnBookborrow.setOnAction(event->handleBtnborrow());
 		
 		
 	}
-	
-	private void handleBtnRegister() { //회원등록
+	//도서대출 버튼눌렀을 이벤트 정의
+	private void handleBtnborrow() {
 		Stage stage = new Stage(StageStyle.UTILITY);
 		stage.initModality(Modality.WINDOW_MODAL);
 		stage.initOwner(btnAdd.getScene().getWindow());
 		
 		try {
-			Parent parent = FXMLLoader.load(getClass().getResource("member.fxml"));
+			Parent parent = FXMLLoader.load(getClass().getResource("BookBorrow.fxml"));
 			Scene s = new Scene(parent);
-			stage.setTitle("회원을 등록하세요.");
+			stage.setTitle("도서대출창");
 			stage.setScene(s);
-			stage.show();
+			stage.show();	
 			
-			TextField txtName = (TextField) parent.lookup("#txtName");
-			TextField txtAge = (TextField) parent.lookup("#txtAge");
-			TextField txtPhone = (TextField) parent.lookup("#txtPhone");
-			TextField txtEmail = (TextField) parent.lookup("#txtEmail");
+			TableView<Book> tableView1 = (TableView) parent.lookup("#tableView1");
 			
-			Button btnMemberAdd= (Button) parent.lookup("#btnMemberAdd");
-			btnMemberAdd.setOnAction(event->{
-				if(txtName.getText() == null || txtName.getText().equals("")) {
-					showPopup("이름을 입력하세요!!!");	
-				}else if(txtAge.getText() == null || txtAge.getText().equals("")) {
-					showPopup("나이를 입력하세요!!!");
-				}else if(txtPhone.getText()==null || txtPhone.getText().equals("")) {
-					showPopup("연락처를 입력하세요!!");
-				}else if(txtEmail.getText()==null || txtEmail.getText().equals("")) {
-					showPopup("이메일을입력하세요!!");
-				}else {
-				Member member = new Member(txtName.getText(), Integer.parseInt(txtAge.getText()), txtPhone.getText()
-						,txtEmail.getText());
-				
-				//입력한 텍스트 리스트에추가, tableView에 값추가
-				mlist.add(member);
-				stage.close(); //회원정보 입력하고 등록버튼누르면 해당 창닫김.	
+			TableColumn<Book, ?> tc = tableView1.getColumns().get(0); //첫번째칼럼
+			tc.setCellValueFactory(new PropertyValueFactory<>("title"));
+			
+			tc = tableView1.getColumns().get(1);
+			tc.setCellValueFactory(new PropertyValueFactory<>("borrow"));
+
+			tc = tableView1.getColumns().get(2);
+			tc.setCellValueFactory(new PropertyValueFactory<>("borrowdate"));
+			
+			list2=FXCollections.observableArrayList();
+			for(int i=0; i<list.size(); i++) {
+				Book book = new Book(list.get(i).getTitle(), "가능", "");
+				list2.add(book);
+			}
+			tableView1.setItems(list2);
+
+			//대출 테이블 뷰의 칼럼 클릭했을때 이벤트 정
+			tableView1.setOnMouseClicked(event->{
+				if(event.getClickCount()==1) { //한번 클릭했을
+					String stitle = tableView1.getSelectionModel().getSelectedItem().getTitle();
+					//대출 테이블 칼럼 클릭후 대출 버튼눌렀을경
+					Button btnBookBorrow =  (Button) parent.lookup("#btnBookBorrow");
+					
+					btnBookBorrow.setOnAction(event1->{
+						Stage stage1 = new Stage(StageStyle.UTILITY);
+						stage1.initModality(Modality.WINDOW_MODAL);
+						stage1.initOwner(btnAdd.getScene().getWindow());
+						
+						
+						try {
+							Parent p2 = FXMLLoader.load(getClass().getResource("BorrowAdd.fxml"));
+							Scene s1 = new Scene(p2);
+							stage1.setScene(s1);
+							stage1.show();
+							
+							
+							
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						
+						
+					});
 				}
-			});
-			
-			//취소 눌렀을때 입력한값 초기화
-			Button btnMemberInit=(Button) parent.lookup("#btnMemberInit");
-			btnMemberInit.setOnAction(event->{
-				txtName.clear();
-				txtAge.clear();
-				txtPhone.clear();
-				txtEmail.clear();
-				txtName.requestFocus();
 			});
 			
 			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		
 	}
 
+	//대출 테이블뷰 클릭 한번해서 넘어왔다 ~
+	private void handleBtnOneClick(String stitle) {
+		
+		
+	}
+	//회원정보 버튼 눌렀을때 이벤트정
+	private void handleBtnMember() {
+		Stage stage = new Stage(StageStyle.UTILITY);
+		stage.initModality(Modality.WINDOW_MODAL);
+		stage.initOwner(btnAdd.getScene().getWindow());
+		
+		try {
+			Parent parent = FXMLLoader.load(getClass().getResource("memberList.fxml"));
+			Scene s = new Scene(parent);
+			stage.setTitle("회원 정보창");
+			stage.setScene(s);
+			stage.show();	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 	private void showPopup(String msg) { // 등록정보 입력안할때
 		HBox hbox = new HBox();
 		hbox.setStyle("-fx-background-color: black; -fx-background-radius: 20;");

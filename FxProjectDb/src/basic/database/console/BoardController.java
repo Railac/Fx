@@ -7,7 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
+import java.util.function.Predicate;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -27,8 +29,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class BoardController implements Initializable{
-	//btnMemberAdd=회원가입, btnLogin=접속(로그인)버튼
-@FXML Button btnMemberAdd, btnLogin;
+	//btnMemberAdd=회원가입, btnLogin=접속(로그인)버튼, btnExit=종료
+@FXML Button btnMemberAdd, btnLogin, btnExit;
 
 @FXML TextField txtId;
 @FXML PasswordField txtPwd;
@@ -43,6 +45,7 @@ int i=0;
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		mlist=FXCollections.observableArrayList();
+		btnExit.setOnAction(event->Platform.exit());
 		
 		btnLogin.setOnAction(event->{
 			if(txtId.getText() == null || txtId.getText().equals("")) {//start if1
@@ -52,7 +55,7 @@ int i=0;
 			}else {			
 				list=FXCollections.observableArrayList();
 				list=getMemberList();
-			
+				
 			for(i=0;i<list.size(); i++) {//start for1
 				
 				//start if 2
@@ -65,7 +68,7 @@ int i=0;
 						stage.initModality(Modality.WINDOW_MODAL);
 						stage.initOwner(btnMemberAdd.getScene().getWindow()); 
 						
-						try {//관리자 도서등록창
+						try {
 							Parent parent=FXMLLoader.load(getClass().getResource("bookList.fxml"));
 							Scene s = new Scene(parent);
 							stage.setScene(s);

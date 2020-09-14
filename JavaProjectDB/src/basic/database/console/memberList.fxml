@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.control.Button?>
+
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" prefHeight="250" prefWidth="405"
+		fx:controller="basic.database.console.MemberController">
+	<!-- 회원 정보 -->
+	
+	<center>
+		<TableView fx:id="MtableView" prefWidth="420" prefHeight="200" >
+			<columns>
+				<TableColumn prefWidth="100" resizable="false" text="이름" />
+				<TableColumn prefWidth="100" resizable="false" text="나이" />
+				<TableColumn prefWidth="100" resizable="false" text="연락처" />
+				<TableColumn prefWidth="100" resizable="false" text="이메일" />
+			</columns>
+		</TableView>
+	</center>
+	
+	<bottom>
+		<HBox alignment="CENTER" prefHeight="50" prefWidth="123.0" spacing="20">
+			<children>
+				<Button fx:id="btnMemberAdd" text="회원등록" />
+				<Button fx:id="btnMemberUpdate" text="회원수정" />
+				<Button fx:id="btnMemberDelete" text="회원삭제" />			
+			</children>
+		
+		</HBox>
+	
+	</bottom>
+	
+</BorderPane>
+

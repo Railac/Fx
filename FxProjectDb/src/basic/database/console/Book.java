@@ -11,8 +11,8 @@ public class Book {
 	private SimpleStringProperty author; //저자
 	private SimpleStringProperty publisher; //출판사
 	private SimpleIntegerProperty price; //가격
-	private SimpleStringProperty borrow ; //대출여부
-	private SimpleStringProperty borrowdate ; //반납
+	private SimpleStringProperty borrow; //대출여부
+	private SimpleStringProperty borrowdate ; //반납일
 	
 	public Book(String title, String author, String publisher, int price) {
 		this.title = new SimpleStringProperty(title);

@@ -20,9 +20,8 @@
 			<items>
 				<Button fx:id ="btnAdd" text="도서등록" />
 				<Button fx:id ="btnDelete" text="도서삭제" />
-				<Button fx:id ="btnRegister" text="회원등록" />
-				<Button text="도서대출" />
-				<Button text="회원정보" />
+				<Button fx:id ="btnMember" text="회원정보" />
+				<Button fx:id ="btnBookborrow" text="도서대출" />
 				<ComboBox promptText="선택">
 					<items>
 						<FXCollections fx:factory="observableArrayList">
